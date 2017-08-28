@@ -88,19 +88,12 @@
     <dependencies>
       <dependency>
         <groupId>org.nuxeo.ecm.lambda.integration</groupId>
-        <artifactId>nuxeo-lambda-integration-core</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.nuxeo.ecm.lambda.integration</groupId>
-        <artifactId>nuxeo-lambda-integration-endpoint</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.nuxeo.ecm.lambda.conversion</groupId>
-        <artifactId>nuxeo-lambda-image-conversion</artifactId>
+        <artifactId>nuxeo-lambda-integration-parent</artifactId>
+        <scope>import</scope>
+        <type>pom</type>
         <version>${project.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
+
 </project>

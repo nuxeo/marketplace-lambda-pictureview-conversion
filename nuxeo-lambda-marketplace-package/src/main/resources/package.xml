@@ -1,8 +1,9 @@
 <!-- See documentation at http://doc.nuxeo.com/x/HgIz -->
 <package type="addon" name="nuxeo-lambda-marketplace-package" version="@VERSION@">
-  <title>Nuxeo lambda integration marketplace</title>
+  <title>Nuxeo Lambda PictureView Conversion</title>
   <description>
-    <p>Put here an HTML description of your Nuxeo Package.</p>
+    <p>The add-on lets you to delegate picture view creation to AWS Lambda. Currently the add-on works with the most popular formats, such as JPEG, PNG, GIF, TIF, PSD and others</p>
+    <p>For additional information please review <a href="https://github.com/nuxeo/nuxeo-lambda-pictureview-conversion">documentation</a></p>
   </description>
   <!-- <home-page>http://doc.nuxeo.com/</home-page> -->
   <vendor>Nuxeo</vendor>

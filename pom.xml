@@ -10,7 +10,7 @@
   <groupId>org.nuxeo.ecm.lambda.integration</groupId>
   <artifactId>nuxeo-lambda-marketplace-parent</artifactId>
   <version>9.3-SNAPSHOT</version>
-  <name>Nuxeo lambda integration parent</name>
+  <name>Nuxeo lambda integration marketplace parent</name>
   <description/>
   <packaging>pom</packaging>
 
@@ -89,19 +89,15 @@
       <dependency>
         <groupId>org.nuxeo.ecm.lambda.integration</groupId>
         <artifactId>nuxeo-lambda-integration-core</artifactId>
-        <scope>import</scope>
-        <type>pom</type>
         <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>org.nuxeo.ecm.lambda.integration</groupId>
-        <artifactId>nuxeo-lambda-integration-endoint</artifactId>
-        <scope>import</scope>
-        <type>pom</type>
+        <artifactId>nuxeo-lambda-integration-endpoint</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.nuxeo.ecm.lambda.integration</groupId>
+        <groupId>org.nuxeo.ecm.lambda.conversion</groupId>
         <artifactId>nuxeo-lambda-image-conversion</artifactId>
         <version>${project.version}</version>
       </dependency>

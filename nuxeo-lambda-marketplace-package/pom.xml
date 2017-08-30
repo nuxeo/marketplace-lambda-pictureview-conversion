@@ -4,10 +4,10 @@
     <groupId>org.nuxeo.ecm.lambda.integration</groupId>
     <artifactId>nuxeo-lambda-marketplace-parent</artifactId>
     <version>9.3-SNAPSHOT</version>
-    <relativePath>../pom.xml</relativePath>
   </parent>
 
   <artifactId>nuxeo-lambda-marketplace-package</artifactId>
+  <version>9.3-SNAPSHOT</version>
   <packaging>zip</packaging>
   <name>Nuxeo lambda integration marketplace </name>
 

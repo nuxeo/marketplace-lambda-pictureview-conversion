@@ -30,7 +30,7 @@
       <artifactId>nuxeo-lambda-integration-endpoint</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.nuxeo.ecm.lambda.integration</groupId>
+      <groupId>org.nuxeo.ecm.lambda.conversion</groupId>
       <artifactId>nuxeo-lambda-image-conversion</artifactId>
     </dependency>
   </dependencies>

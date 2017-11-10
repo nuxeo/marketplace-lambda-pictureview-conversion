@@ -1,7 +1,0 @@
-## Set name of the function used at AWS
-nuxeo.lambda.image.conversion=your-function-name
-
-# Set list of templates to include, comma separated values.
-nuxeo.template.includes=common
-
-# org.nuxeo.ecm.instance.description=Nuxeo ECM customized with Nuxeo Lambda Integration Marketplace

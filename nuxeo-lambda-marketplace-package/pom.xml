@@ -1,15 +1,16 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
-    <groupId>org.nuxeo.ecm.lambda.integration</groupId>
+    <groupId>org.nuxeo.marketplace.lambda</groupId>
     <artifactId>nuxeo-lambda-marketplace-parent</artifactId>
     <version>9.3-SNAPSHOT</version>
   </parent>
 
   <artifactId>nuxeo-lambda-marketplace-package</artifactId>
-  <version>9.3-SNAPSHOT</version>
   <packaging>zip</packaging>
-  <name>Nuxeo lambda integration marketplace </name>
+  <name>Nuxeo Lambda Marketplace</name>
 
   <dependencies>
     <!-- Base distribution(s) for the MP -->
@@ -22,15 +23,19 @@
 
     <!-- Additional bundles to be deployed by the MP -->
     <dependency>
-      <groupId>org.nuxeo.ecm.lambda.integration</groupId>
-      <artifactId>nuxeo-lambda-integration-core</artifactId>
+      <groupId>org.nuxeo.lambda</groupId>
+      <artifactId>nuxeo-lambda-core</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.nuxeo.ecm.lambda.integration</groupId>
-      <artifactId>nuxeo-lambda-integration-endpoint</artifactId>
+      <groupId>org.nuxeo.lambda</groupId>
+      <artifactId>nuxeo-lambda-aws</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.nuxeo.ecm.lambda.conversion</groupId>
+      <groupId>org.nuxeo.lambda</groupId>
+      <artifactId>nuxeo-lambda-endpoint</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.nuxeo.lambda.conversion</groupId>
       <artifactId>nuxeo-lambda-image-conversion</artifactId>
     </dependency>
   </dependencies>

@@ -20,6 +20,10 @@
     <platform>server-@DISTRIB_VERSION@</platform>
     <platform>server-@DISTRIB_VERSION@-HF*</platform>
   </platforms>
+  <dependencies>
+    <package>amazon-s3-online-storage</package>
+    <package>nuxeo-dam</package>
+  </dependencies>
   <!-- Dependencies on other packages -->
   <!-- <dependencies> -->
   <!-- <package>another-package:1.0.0:1.0.0</package> -->

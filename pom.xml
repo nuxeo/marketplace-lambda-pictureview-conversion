@@ -15,6 +15,10 @@
   <description />
   <packaging>pom</packaging>
 
+  <properties>
+    <nuxeo.dam.nxr.version>6.3.3-SNAPSHOT</nuxeo.dam.nxr.version>
+  </properties>
+
   <modules>
     <module>nuxeo-lambda-marketplace-package</module>
   </modules>
@@ -45,6 +49,13 @@
         <groupId>org.nuxeo.marketplace.lambda</groupId>
         <artifactId>nuxeo-lambda-marketplace-package</artifactId>
         <version>${project.version}</version>
+        <type>zip</type>
+      </dependency>
+      <dependency>
+        <groupId>org.nuxeo.marketplace.dam</groupId>
+        <artifactId>marketplace</artifactId>
+        <version>${nuxeo.dam.nxr.version}</version>
+        <classifier>nxr-server</classifier>
         <type>zip</type>
       </dependency>
     </dependencies>

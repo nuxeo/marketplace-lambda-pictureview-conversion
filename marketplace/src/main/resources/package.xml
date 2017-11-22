@@ -24,6 +24,10 @@
     <package>amazon-s3-online-storage</package>
     <package>nuxeo-dam</package>
   </dependencies>
+  <conflicts>
+    <!-- Showcase Content override the Picture and Video Listeners for bad reasons -->
+    <package>nuxeo-showcase-content</package>
+  </conflicts>
   <license>Apache License, Version 2.0</license>
   <license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
   <!-- Visibility: PRIVATE | MARKETPLACE | DEV | PUBLIC -->

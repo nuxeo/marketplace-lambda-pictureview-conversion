@@ -9,18 +9,17 @@
   </parent>
 
   <groupId>org.nuxeo.marketplace.lambda</groupId>
-  <artifactId>nuxeo-lambda-marketplace-parent</artifactId>
-  <version>9.3-SNAPSHOT</version>
-  <name>Nuxeo Lambda Marketplace Parent</name>
-  <description />
+  <artifactId>parent</artifactId>
   <packaging>pom</packaging>
+  <name>Nuxeo Lambda Marketplace Parent</name>
+  <version>1.0.0-SNAPSHOT</version>
 
   <properties>
-    <nuxeo.dam.nxr.version>6.3.3-SNAPSHOT</nuxeo.dam.nxr.version>
+    <nuxeo.dam.nxr.version>6.3.2-SNAPSHOT</nuxeo.dam.nxr.version>
   </properties>
 
   <modules>
-    <module>nuxeo-lambda-marketplace-package</module>
+    <module>marketplace</module>
   </modules>
 
   <dependencyManagement>
@@ -28,26 +27,26 @@
       <dependency>
         <groupId>org.nuxeo.lambda</groupId>
         <artifactId>nuxeo-lambda-core</artifactId>
-        <version>${project.version}</version>
+        <version>${nuxeo.distribution.version}</version>
       </dependency>
       <dependency>
         <groupId>org.nuxeo.lambda</groupId>
         <artifactId>nuxeo-lambda-aws</artifactId>
-        <version>${project.version}</version>
+        <version>${nuxeo.addons.version}</version>
       </dependency>
       <dependency>
         <groupId>org.nuxeo.lambda</groupId>
         <artifactId>nuxeo-lambda-endpoint</artifactId>
-        <version>${project.version}</version>
+        <version>${nuxeo.addons.version}</version>
       </dependency>
       <dependency>
         <groupId>org.nuxeo.lambda.conversion</groupId>
         <artifactId>nuxeo-lambda-image-conversion</artifactId>
-        <version>${project.version}</version>
+        <version>${nuxeo.addons.version}</version>
       </dependency>
       <dependency>
         <groupId>org.nuxeo.marketplace.lambda</groupId>
-        <artifactId>nuxeo-lambda-marketplace-package</artifactId>
+        <artifactId>marketplace-lambda</artifactId>
         <version>${project.version}</version>
         <type>zip</type>
       </dependency>

@@ -3,16 +3,13 @@
   <taskdef resource="org/nuxeo/build/artifact/antlib.xml" uri="urn:nuxeo-artifact"/>
   <taskdef resource="net/sf/antcontrib/antlib.xml"/>
 
-  <target name="build" description="Build Nuxeo Package">
+  <target name="build" description="Build Nuxeo Lambda Marketplace package">
     <property name="outdir" value="${maven.project.build.directory}"/>
-    <!-- Include your artifacts in the graph adding your groupId to groupPrefixes -->
-    <artifact:nuxeo-expand includeTestScope="true" groupPrefixes="org.nuxeo,org.nuxeo.ecm.lambda.integration"/>
-    <!-- For Nuxeo IDE being able to use that distribution as a SDK -->
-    <artifact:print output="${outdir}/artifacts.properties" mode="sdk"/>
-    <artifact:print output="${outdir}/test-artifacts.properties" mode="sdk" scopes="test"/>
-    <!-- Prints the graph for debugging purpose -->
-    <artifact:print output="${outdir}/dependency-tree.log"/>
-    <tstamp/>
+    <artifact:nuxeo-expand includeTestScope="true" groupPrefixes="org.nuxeo" />
+    <artifact:print output="${outdir}/artifacts-lambda.properties" mode="sdk" />
+    <artifact:print output="${outdir}/test-artifacts-lambda.properties" mode="sdk" scopes="test" />
+    <artifact:print output="${outdir}/dependency-tree.log" />
+    <tstamp />
 
     <delete failonerror="false" dir="${outdir}/nxr"/>
     <mkdir dir="${outdir}/nxr"/>
@@ -25,11 +22,11 @@
         <filter token="DISTRIB_VERSION" value="${nuxeo.distribution.version}"/>
       </filterset>
     </copy>
-    <copy file="${outdir}/artifacts.properties" todir="${outdir}/marketplace/install"/>
-    <copy file="${outdir}/test-artifacts.properties" todir="${outdir}/marketplace/install"/>
+    <copy file="${outdir}/artifacts-lambda.properties" todir="${outdir}/marketplace/install"/>
+    <copy file="${outdir}/test-artifacts-lambda.properties" todir="${outdir}/marketplace/install"/>
 
-    <!-- Base distribution NXR -->
     <copy todir="${outdir}">
+      <!-- Base distribution NXR -->
       <artifact:file key="org.nuxeo.ecm.distribution:nuxeo-nxr-server::zip" />
       <!-- DAM NXR -->
       <artifact:file key="org.nuxeo.marketplace.dam:marketplace::zip:nxr-server" />
@@ -37,19 +34,16 @@
 
     <!-- Nuxeo bundles -->
     <copy todir="${outdir}/nxr/bundles" overwrite="true">
-      <artifact:set>
+      <artifact:set excludeRoots="true">
         <includes>
           <artifact groupId="org.nuxeo*" />
-          <artifact groupId="nuxeo-studio" />
-          <!-- Include your artifacts using their groupId for instance -->
-          <artifact groupId="org.nuxeo.ecm.lambda.integration*" />
         </includes>
         <excludes>
-          <artifact groupId="${maven.project.groupId}" artifactId="${maven.project.artifactId}" version="${maven.project.version}" type="${maven.project.packaging}"/>
-          <artifact scope="test"/>
-          <artifact scope="provided"/>
-          <artifact type="pom"/>
-          <artifact groupId="org.nuxeo.lib*"/>
+          <artifact groupId="org.nuxeo.lib*" />
+          <artifact groupId="org.nuxeo.build*" />
+          <artifact scope="test" />
+          <artifact scope="provided" />
+          <artifact type="pom" />
         </excludes>
       </artifact:set>
     </copy>
@@ -62,19 +56,11 @@
         </includes>
         <excludes>
           <artifact scope="test" />
-          <artifact scope="provided" />
-          <artifact type="pom" />
-          <artifact groupId="nuxeo-studio" />
-          <!-- Filter out your artifacts using their groupId for instance -->
-          <artifact groupId="org.nuxeo.ecm.lambda.integration*"/>
         </excludes>
       </artifact:set>
     </copy>
     <nx:rmdups dir="${outdir}/nxr/lib"/>
-    <!-- Temporary ZIP Nuxeo NXR to compare with base distribution NXR -->
     <zip destfile="${outdir}/nxr-${maven.project.version}.zip" basedir="${outdir}/nxr"/>
-    <!-- Optionally attach the NXR for later use by other modules -->
-    <artifact:attach file="${outdir}/nxr-${maven.project.version}.zip" classifier="nxr" type="zip"/>
 
     <unzip src="${outdir}/nuxeo-nxr-server-${nuxeo.distribution.version}.zip"
            dest="${outdir}/nuxeo-nxr-all" />
@@ -82,21 +68,19 @@
            dest="${outdir}/nuxeo-nxr-all" />
     <zip destfile="${outdir}/nuxeo-nxr-all-${nuxeo.distribution.version}.zip"
          basedir="${outdir}/nuxeo-nxr-all" />
-    <!-- Your MP only needs to include files not already provided by the base distribution -->
-    <nx:zipdiff
-      file1="${outdir}/nxr-${maven.project.version}.zip"
-      file2="${outdir}/nuxeo-nxr-all-${nuxeo.distribution.version}.zip"
-      includesfile="${outdir}/includes"
-      excludesfile="${outdir}/excludesfile"
-      patternsetid="nxr.versus.distribution"
-      ignoreContent="false"
-      ignoreContentPattern=".*\.jar$"></nx:zipdiff>
+    <nx:zipdiff file1="${outdir}/nxr-${maven.project.version}.zip"
+                file2="${outdir}/nuxeo-nxr-all-${nuxeo.distribution.version}.zip"
+                includesfile="${outdir}/includes"
+                excludesfile="${outdir}/excludesfile"
+                patternsetid="lambda.versus.server"
+                ignoreContent="false"
+                ignoreContentPattern=".*\.jar$">
+    </nx:zipdiff>
     <unzip src="${outdir}/nxr-${maven.project.version}.zip" dest="${outdir}/marketplace/install">
-      <patternset refid="nxr.versus.distribution"/>
+      <patternset refid="lambda.versus.server"/>
     </unzip>
 
     <!-- Generate install.xml content -->
-    <!-- See documentation at http://doc.nuxeo.com/x/IgIz -->
     <var name="install.bundles" value=""/>
     <if>
       <available file="${outdir}/marketplace/install/bundles"/>
@@ -116,9 +100,8 @@
       </then>
     </if>
 
-    <var
-      name="install.properties"
-      value="${line.separator}
+    <var name="install.properties"
+         value="${line.separator}
   &lt;copy file=&quot;${package.root}/install/artifacts.properties&quot;${line.separator}
     todir=&quot;${env.server.home}/sdk&quot; overwrite=&quot;true&quot; /&gt;${line.separator}
   &lt;copy file=&quot;${package.root}/install/test-artifacts.properties&quot;${line.separator}
@@ -128,9 +111,8 @@
     <if>
       <available file="${outdir}/marketplace/install/templates"/>
       <then>
-        <var
-          name="install.templates"
-          value="${line.separator}
+        <var name="install.templates"
+             value="${line.separator}
   &lt;copy dir=&quot;${package.root}/install/templates&quot; todir=&quot;${env.templates}&quot; overwrite=&quot;true&quot; /&gt;${line.separator}
   &lt;config addtemplate=&quot;lambda&quot; /&gt;${line.separator}"/>
       </then>

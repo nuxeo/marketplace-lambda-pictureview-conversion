@@ -4,13 +4,13 @@
 
   <parent>
     <groupId>org.nuxeo.marketplace.lambda</groupId>
-    <artifactId>nuxeo-lambda-marketplace-parent</artifactId>
-    <version>9.3-SNAPSHOT</version>
+    <artifactId>parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>nuxeo-lambda-marketplace-package</artifactId>
+  <artifactId>marketplace-lambda</artifactId>
   <packaging>zip</packaging>
-  <name>Nuxeo Lambda Marketplace</name>
+  <name>Nuxeo Lambda Marketplace Package</name>
 
   <dependencies>
     <!-- Base distribution(s) for the MP -->

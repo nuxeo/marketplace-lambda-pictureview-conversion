@@ -8,43 +8,9 @@ The marketplace package has to be built with the following command:
 
 ## Configuration
 
-Nuxeo AWS Lambda Integration leverages pluggability of the Nuxeo platform by using service extensions. 
-`LambdaComponent` contains embedded class `NuxeoServiceImpl` that _implements_ `NuxeoService` interface. 
-The component expects a following contribution or even contributions. There is no limit in contributing as many functions as you want.
-```
-<extension target="org.nuxeo.ecm.lambda.core.service.LambdaComponent" point="lambdaConfiguration">
-   <lambdaConfigs name="your-function">
-     <parameters>
-       <parameter key="watermark_X">0</parameter>
-       <parameter key="watermark_Y">0</parameter>
-       <parameter key="watermark_width">200</parameter>
-       <parameter key="watermark_height">200</parameter>
-     </parameters>
-   </lambdaConfigs>
- </extension>
- ```
- Where `lambdaConfigs` contains `name` property, which is the name of AWS Lambda function configured in your AWS account
- `parameters` tag contains additional parameters, that will be passed to the AWS Lambda function as a JSON with default parameters, such as `cbId`.
- `cbId` is a unique identifier, that will be expected on a Nuxeo endpoint.
+to set up the function name used at your AWS account you need to update `nuxeo.conf` property `nuxeo.lambda.image.conversion`. Otherwise `nuxeo-lambda-picture` name will be used. 
  
- AWS Lambda does not have any authentication information for your Nuxeo instance. That is why _OpenURL_ extension must be configured to receive and process callback.
- By default, the addon has LambdaResponseReceiverServiceImpl, that follows next configuration:
- ```
- <extension target="org.nuxeo.ecm.lambda.integration.endpoint.service.LambdaResponseReceiverComponent" point="lambdaAcceptor">
-     <lambdaReceiver class="org.nuxeo.ecm.lambda.integration.endpoint.service.LambdaResponseReceiverServiceImpl" />
-   </extension>
- 
-   <extension point="openUrl"
-              target="org.nuxeo.ecm.platform.ui.web.auth.service.PluggableAuthenticationService">
-     <openUrl name="OpenLambdaEndpoint">
-       <method>POST</method>
-       <grantPattern>/nuxeo/site/lambda/error/.*</grantPattern>
-       <grantPattern>/nuxeo/site/lambda/success/.*</grantPattern>
-     </openUrl>
-   </extension>
- ```
- 
- It expects callbacks on two addresses:
+ Contribution expects callbacks on two urls:
  `http[s]://{your.address}/nuxeo/site/lambda/success/{callbackID}`
  
  and
@@ -59,13 +25,16 @@ The component expects a following contribution or even contributions. There is n
  
 ## About
 
-This project is a Nuxeo plugin that integrate AWS Lambda to offload heavy processing from Nuxeo/WorkManager to AWS.
+The contribution redirects all image conversion to AWS Lambda.
+Currently, Nuxeo Lambda used for picture conversion creation.
+Current implementation uses streaming to download the initial file from Nuxeo.
+This approach allows to get around with storage limitation at AWS Lambda in many cases.
 
-The initial use case is to offload the `PictureViews` generation (generating several rendition with different size of the same source image).
+The contribution exposes `Picture.Recompute` automation operation. The operation accepts only one parameter - `query`.
+It will recompute all `Picture`s that satisfies the given query using AWS Lambda. To get more information about calling automation operations
+in Nuxeo, please follow our official [documentation](https://doc.nuxeo.com/nxdoc/automation/).
 
-Statically sizing Nuxeo nodes and the `WorkManager` for handling a large upload of pictures is not ideal since we need to allocate a lot of resources that may be un-used most of the time. On the other hand, having a small number of conversion threads will result in a low processing when uploading thousands of pictures.
-
-Using AWS Lambda is a great way to offload this processing:
+Using AWS Lambda is a great way to offload following processing:
 
  - we can easily start a lot of Lambda
  - Lambda have access to `imagemagick`

@@ -10,7 +10,7 @@
   <artifactId>parent</artifactId>
   <packaging>pom</packaging>
   <name>Nuxeo Lambda Marketplace Parent</name>
-  <version>9.10-SNAPSHOT</version>
+  <version>1.0.1-SNAPSHOT</version>
 
   <properties>
     <nuxeo.dam.nxr.version>6.3.3-SNAPSHOT</nuxeo.dam.nxr.version>

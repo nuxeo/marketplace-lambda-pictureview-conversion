@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<component name="org.nuxeo.lambda.picture.view.generator.contrib">
+
+  <require>org.nuxeo.lambda.picture.aws.config</require>
+  <extension target="org.nuxeo.lambda.core.LambdaService" point="lambdaConfiguration">
+    <lambdaConfigs name="${nuxeo.lambda.image.conversion}" class="org.nuxeo.lambda.aws.AWSLambdaCaller">
+      <onSuccessEvent>afterLambdaPictureResponse</onSuccessEvent>
+      <onErrorEvent>lambdaPictureFailed</onErrorEvent>
+    </lambdaConfigs>
+  </extension>
+
+</component>

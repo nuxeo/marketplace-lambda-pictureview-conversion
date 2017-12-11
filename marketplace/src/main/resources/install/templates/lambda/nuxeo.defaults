@@ -1,0 +1,2 @@
+## Set name of the function used at AWS
+nuxeo.lambda.image.conversion=nuxeo-lambda-picture

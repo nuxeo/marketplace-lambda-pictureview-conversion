@@ -102,9 +102,9 @@
 
     <var name="install.properties"
          value="${line.separator}
-  &lt;copy file=&quot;${package.root}/install/artifacts.properties&quot;${line.separator}
+  &lt;copy file=&quot;${package.root}/install/artifacts-lambda.properties&quot;${line.separator}
     todir=&quot;${env.server.home}/sdk&quot; overwrite=&quot;true&quot; /&gt;${line.separator}
-  &lt;copy file=&quot;${package.root}/install/test-artifacts.properties&quot;${line.separator}
+  &lt;copy file=&quot;${package.root}/install/test-artifacts-lambda.properties&quot;${line.separator}
     todir=&quot;${env.server.home}/sdk&quot; overwrite=&quot;true&quot; /&gt;"/>
 
     <var name="install.templates" value=""/>

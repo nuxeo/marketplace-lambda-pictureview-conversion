@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.nuxeo.ecm.distribution</groupId>
-    <artifactId>nuxeo-distribution</artifactId>
+    <groupId>org.nuxeo</groupId>
+    <artifactId>nuxeo-ecm</artifactId>
     <version>11.1-SNAPSHOT</version>
   </parent>
 
@@ -11,10 +11,6 @@
   <packaging>pom</packaging>
   <name>Nuxeo Lambda Marketplace Parent</name>
   <version>1.2.0-SNAPSHOT</version>
-
-  <properties>
-    <nuxeo.dam.nxr.version>6.5.0-SNAPSHOT</nuxeo.dam.nxr.version>
-  </properties>
 
   <modules>
     <module>marketplace</module>
@@ -25,34 +21,27 @@
       <dependency>
         <groupId>org.nuxeo.lambda</groupId>
         <artifactId>nuxeo-lambda-core</artifactId>
-        <version>${nuxeo.distribution.version}</version>
+        <version>${nuxeo.platform.version}</version>
       </dependency>
       <dependency>
         <groupId>org.nuxeo.lambda</groupId>
         <artifactId>nuxeo-lambda-aws</artifactId>
-        <version>${nuxeo.addons.version}</version>
+        <version>${nuxeo.platform.version}</version>
       </dependency>
       <dependency>
         <groupId>org.nuxeo.lambda</groupId>
         <artifactId>nuxeo-lambda-endpoint</artifactId>
-        <version>${nuxeo.addons.version}</version>
+        <version>${nuxeo.platform.version}</version>
       </dependency>
       <dependency>
         <groupId>org.nuxeo.lambda.conversion</groupId>
         <artifactId>nuxeo-lambda-image-conversion</artifactId>
-        <version>${nuxeo.addons.version}</version>
+        <version>${nuxeo.platform.version}</version>
       </dependency>
       <dependency>
         <groupId>org.nuxeo.marketplace.lambda</groupId>
         <artifactId>marketplace-lambda</artifactId>
         <version>${project.version}</version>
-        <type>zip</type>
-      </dependency>
-      <dependency>
-        <groupId>org.nuxeo.marketplace.dam</groupId>
-        <artifactId>marketplace</artifactId>
-        <version>${nuxeo.dam.nxr.version}</version>
-        <classifier>nxr-server</classifier>
         <type>zip</type>
       </dependency>
     </dependencies>

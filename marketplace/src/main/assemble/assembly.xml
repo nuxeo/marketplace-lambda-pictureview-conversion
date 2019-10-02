@@ -28,8 +28,6 @@
     <copy todir="${outdir}">
       <!-- Base distribution NXR -->
       <artifact:file key="org.nuxeo.ecm.distribution:nuxeo-nxr-server::zip" />
-      <!-- DAM NXR -->
-      <artifact:file key="org.nuxeo.marketplace.dam:marketplace::zip:nxr-server" />
     </copy>
 
     <!-- Nuxeo bundles -->
